@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <AnchorPane prefHeight="400.0" prefWidth="600.0">
+         <children>
+            <Button fx:id="button_login" layoutX="52.0" layoutY="34.0" mnemonicParsing="false" text="Login" />
+            <Label fx:id="label_main_page" layoutX="286.0" layoutY="164.0" text=" Main Page" />
+            <Label fx:id="label_role" layoutX="302.0" layoutY="192.0" text="Role">
+               <font>
+                  <Font name="Inter Regular" size="12.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>
