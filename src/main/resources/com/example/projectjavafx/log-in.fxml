@@ -4,7 +4,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="454.0" prefWidth="354.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="454.0" prefWidth="354.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectjavafx.LogInController">
    <children>
       <AnchorPane prefHeight="456.0" prefWidth="354.0">
          <children>
@@ -28,7 +28,7 @@
                   <Font name="Inter Regular" size="12.0" />
                </font>
             </Label>
-            <Button layoutX="182.0" layoutY="411.0" mnemonicParsing="false" style="-fx-background-color: invisible; -fx-cursor: hand;" text="sign-up now" textFill="#00000080" underline="true" />
+            <Button fx:id="button_signup" layoutX="182.0" layoutY="411.0" mnemonicParsing="false" style="-fx-background-color: transparent; -fx-cursor: hand;" text="sign-up now" textFill="#00000080" underline="true" />
             <PasswordField fx:id="tf_password" layoutX="27.0" layoutY="184.0" prefHeight="36.0" prefWidth="302.0" promptText="password" />
          </children>
       </AnchorPane>

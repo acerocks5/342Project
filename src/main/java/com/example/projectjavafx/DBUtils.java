@@ -35,7 +35,7 @@ public class DBUtils {
         }
         Stage stage = (Stage) ((Node) event.getSource()).getScene().getWindow();
         stage.setTitle(title);
-        stage.setScene(new Scene(root, 600, 400));
+        stage.setScene(new Scene(root));
         stage.show();
     }
 
@@ -46,7 +46,7 @@ public class DBUtils {
         ResultSet resultSet = null;
 
         try{
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/342Project", "root", "password");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/342project", "root", "password");
             psCheckUserExists= connection.prepareStatement("SELECT  * FROM users WHERE username = ?");
             psCheckUserExists.setString(1, username);
             resultSet = psCheckUserExists.executeQuery();
@@ -57,7 +57,7 @@ public class DBUtils {
                 alert.setContentText("You cannot use this username");
                 alert.show();
             } else {
-                psInsert = connection.prepareStatement("INSERT INTO users (username, password, role VALUES (?, ?, ?))");
+                psInsert = connection.prepareStatement("INSERT INTO users (username, password, role) VALUES (?, ?, ?)");
                 psInsert.setString(1, username);
                 psInsert.setString(2, password);
                 psInsert.setString(3, role);
@@ -104,7 +104,7 @@ public class DBUtils {
         PreparedStatement preparedStatement = null;
         ResultSet resultSet = null;
         try{
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/342Project", "root", "password");
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/342project", "root", "password");
             preparedStatement = connection.prepareStatement("SELECT password, role FROM users WHERE username = ?");
             preparedStatement.setString(1, username);
             resultSet= preparedStatement.executeQuery();
