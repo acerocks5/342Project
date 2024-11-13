@@ -2,19 +2,28 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectjavafx.MainController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="703.0" prefWidth="1125.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectjavafx.MainController">
    <children>
-      <AnchorPane prefHeight="400.0" prefWidth="600.0">
+      <AnchorPane prefHeight="705.0" prefWidth="1126.0">
          <children>
             <Button fx:id="button_login" layoutX="52.0" layoutY="34.0" mnemonicParsing="false" text="Login" />
-            <Label fx:id="label_main_page" layoutX="286.0" layoutY="164.0" text=" Main Page" />
-            <Label fx:id="label_role" layoutX="302.0" layoutY="192.0" text="Role">
-               <font>
-                  <Font name="Inter Regular" size="12.0" />
-               </font>
-            </Label>
+            <TableView fx:id="offeringTable" layoutX="14.0" layoutY="76.0" prefHeight="605.0" prefWidth="1101.0">
+              <columns>
+                  <TableColumn fx:id="lesson_col" prefWidth="100.0" text="Type of Lesson" />
+                  <TableColumn fx:id="instructor_col" prefWidth="100.0" text="Instructor" />
+                <TableColumn fx:id="startDate_col" prefWidth="100.0" text="Start Date" />
+                <TableColumn fx:id="endDate_col" prefWidth="100.0" text="End Date" />
+                  <TableColumn fx:id="startTime_col" prefWidth="100.0" text="Start Time" />
+                  <TableColumn fx:id="endTime_col" prefWidth="100.0" text="End Time" />
+                  <TableColumn fx:id="dayOfWeek_col" prefWidth="100.0" text="Day of Week" />
+                  <TableColumn fx:id="city_col" prefWidth="75.0" text="City" />
+                  <TableColumn fx:id="location_col" prefWidth="75.0" text="Location" />
+                  <TableColumn fx:id="timeSlot_col" prefWidth="75.0" text="Time Slot" />
+                  <TableColumn fx:id="privacy_col" prefWidth="75.0" text="Privacy" />
+                  <TableColumn fx:id="availability_col" prefWidth="75.0" text="Availability" />
+              </columns>
+            </TableView>
          </children>
       </AnchorPane>
    </children>

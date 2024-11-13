@@ -7,12 +7,28 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.stage.Stage;
+import model.Location;
+import model.Offering;
 
 import java.sql.*;
 
 import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class DBUtils {
+
+    private static Connection connection;
+
+    public static Connection getConnection() {
+        try{
+            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/342project", "root", "password");
+        } catch (SQLException e){
+            Logger.getLogger(DBUtils.class.getName()).log(Level.SEVERE, null, e);
+        }
+
+        return connection;
+    }
 
     public static void changeScene(ActionEvent event, String fxmlFile, String title, String username, String role){
         Parent root = null;
@@ -156,4 +172,6 @@ public class DBUtils {
         }
 
     }
+
+
 }
