@@ -5,26 +5,37 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.geometry.Insets;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.util.Callback;
 import model.Offering;
+import org.w3c.dom.events.MouseEvent;
 
+import java.io.IOException;
 import java.net.URL;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class MainController implements Initializable {
+public class AdminPageController implements Initializable{
     @FXML
-    private Button button_login;
+    private Button button_logout;
+    @FXML
+    private Button button_addOffering;
+    @FXML
+    private Button button_refresh;
+    @FXML
+    private Button button_delete;
 
     @FXML
     private TableView<Offering> offeringTable;
@@ -53,7 +64,8 @@ public class MainController implements Initializable {
     @FXML
     private TableColumn<Offering, String> availability_col;
     @FXML
-    private TableColumn<Offering, Integer> id_col;
+    private TableColumn<Offering, String> id_col;
+
 
     String query = null;
     Connection connection = null;
@@ -67,10 +79,28 @@ public class MainController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         loadTable();
-        button_login.setOnAction(new EventHandler<ActionEvent>() {
+        button_delete.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                deleteData();
+            }
+        });
+        button_refresh.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                refreshTable();
+            }
+        });
+        button_addOffering.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                getAddOfferingView();
+            }
+        });
+        button_logout.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent event) {
-                DBUtils.changeScene(event, "log-in.fxml", "Login", null, null);
+                DBUtils.changeScene(event, "main-view.fxml", "Main Page", null, null);
             }
         });
 
@@ -123,14 +153,53 @@ public class MainController implements Initializable {
         timeSlot_col.setCellValueFactory(new PropertyValueFactory<>("duration"));
         privacy_col.setCellValueFactory(new PropertyValueFactory<>("lessonPrivacy"));
         availability_col.setCellValueFactory(new PropertyValueFactory<>("availability"));
-        id_col.setCellValueFactory(new PropertyValueFactory<>("id"));
-
+        id_col.setCellValueFactory((new PropertyValueFactory<>("id")));
 
 
     }
 
+    private void deleteData(){
+        TableView.TableViewSelectionModel<Offering> selectionModel = offeringTable.getSelectionModel();
+        if(selectionModel.isEmpty()){
+            System.out.println("You need to select offering before deleting");
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setHeaderText(null);
+            alert.setContentText("Please select offering before deleting");
+            alert.showAndWait();
+        }
+        ObservableList<Integer> list = selectionModel.getSelectedIndices();
+        Integer[] selectedIndices = new Integer[list.size()];
+        selectedIndices = list.toArray(selectedIndices);
 
-    public void setUserInformation(String username, String role){
+        Arrays.sort(selectedIndices);
 
+        for(int i = selectedIndices.length -1; i >= 0; i--){
+            selectionModel.clearSelection(selectedIndices[i].intValue());
+            try{
+                int id = selectedIndices[i].intValue()+1;
+                query = "DELETE FROM `offering` WHERE idoffering  ="+id;
+                connection = DBUtils.getConnection();
+                preparedStatement = connection.prepareStatement(query);
+                preparedStatement.execute();
+                refreshTable();
+
+            } catch (SQLException ex) {
+                Logger.getLogger(AdminPageController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+
+    }
+
+    private void getAddOfferingView(){
+        try{
+            Parent parent = FXMLLoader.load(getClass().getResource("add-offering.fxml"));
+            Scene scene = new Scene(parent);
+            Stage stage = new Stage();
+            stage.setScene(scene);
+            stage.initStyle(StageStyle.UTILITY);
+            stage.show();
+        } catch (IOException e){
+            Logger.getLogger(AdminPageController.class.getName()).log(Level.SEVERE, null, e);
+        }
     }
 }

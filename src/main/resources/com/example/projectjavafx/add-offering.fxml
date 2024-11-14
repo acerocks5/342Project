@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="560.0" prefWidth="755.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectjavafx.AddOfferingController">
+   <children>
+      <AnchorPane prefHeight="562.0" prefWidth="755.0">
+         <children>
+            <Label layoutX="37.0" layoutY="28.0" text="Add Offering">
+               <font>
+                  <Font size="29.0" />
+               </font>
+            </Label>
+            <VBox layoutX="37.0" layoutY="89.0" prefHeight="456.0" prefWidth="685.0">
+               <children>
+                  <HBox prefHeight="38.0" prefWidth="686.0">
+                     <children>
+                        <Label style="-fx-padding: 9.5;" text="Lesson Type:" />
+                        <TextField fx:id="tf_lessonType" prefHeight="38.0" prefWidth="578.0" style="-fx-translate-x: 2;" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="38.0" prefWidth="686.0">
+                     <children>
+                        <Label style="-fx-padding: 9.5;" text="Instructor:" />
+                        <TextField fx:id="tf_instructor" prefHeight="38.0" prefWidth="577.0" style="-fx-translate-x: 17;" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="38.0" prefWidth="686.0">
+                     <children>
+                        <Label style="-fx-padding: 9.5;" text="Start Date:" />
+                        <DatePicker fx:id="date_startDate" prefHeight="38.0" prefWidth="578.0" style="-fx-translate-x: 15;" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="38.0" prefWidth="686.0">
+                     <children>
+                        <Label style="-fx-padding: 9.5;" text="End Date:" />
+                        <DatePicker fx:id="date_endDate" prefHeight="38.0" prefWidth="578.0" style="-fx-translate-x: 20;" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="38.0" prefWidth="200.0">
+                     <children>
+                        <Label style="-fx-padding: 9.5;" text="Start Time:" />
+                        <TextField fx:id="tf_startTime" prefHeight="38.0" prefWidth="578.0" style="-fx-translate-x: 14;" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="38.0" prefWidth="200.0">
+                     <children>
+                        <Label style="-fx-padding: 9.5;" text="End Time:" />
+                        <TextField fx:id="tf_endTime" prefHeight="38.0" prefWidth="578.0" style="-fx-translate-x: 19;" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="202.0" prefHeight="38.0" prefWidth="200.0">
+                     <children>
+                        <Label style="-fx-padding: 9.5;" text="Day of Week:" />
+                        <TextField fx:id="tf_dayOfWeek" prefHeight="38.0" prefWidth="579.0" style="-fx-translate-x: 1;" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="240.0" prefHeight="38.0" prefWidth="200.0">
+                     <children>
+                        <Label style="-fx-padding: 9.5;" text="City:" />
+                        <TextField fx:id="tf_city" prefHeight="38.0" prefWidth="580.0" style="-fx-translate-x: 48;" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="279.0" prefHeight="38.0" prefWidth="200.0">
+                     <children>
+                        <Label style="-fx-padding: 9.5;" text="Location:" />
+                        <TextField fx:id="tf_location" prefHeight="38.0" prefWidth="581.0" style="-fx-translate-x: 23;" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="317.0" prefHeight="38.0" prefWidth="200.0">
+                     <children>
+                        <Label style="-fx-padding: 9.5;" text="Duration:" />
+                        <TextField fx:id="tf_duration" prefHeight="38.0" prefWidth="581.0" style="-fx-translate-x: 22;" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="356.0" prefHeight="38.0" prefWidth="200.0">
+                     <children>
+                        <Label style="-fx-padding: 9.5;" text="Privacy:" />
+                        <TextField fx:id="tf_privacy" prefHeight="38.0" prefWidth="582.0" style="-fx-translate-x: 32;" />
+                     </children>
+                  </HBox>
+                  <HBox layoutX="10.0" layoutY="394.0" prefHeight="38.0" prefWidth="200.0">
+                     <children>
+                        <Label style="-fx-padding: 9.5;" text="Availability:" />
+                        <TextField fx:id="tf_availability" prefHeight="38.0" prefWidth="582.0" style="-fx-translate-x: 12;" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Button fx:id="button_addOffering" layoutX="613.0" layoutY="37.0" mnemonicParsing="false" text="Add Offering" />
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>

@@ -30,6 +30,7 @@ public class DBUtils {
         return connection;
     }
 
+
     public static void changeScene(ActionEvent event, String fxmlFile, String title, String username, String role){
         Parent root = null;
 
@@ -37,8 +38,8 @@ public class DBUtils {
             try{
                 FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource(fxmlFile));
                 root = loader.load();
-                MainController mainController = loader.getController();
-                mainController.setUserInformation(username, role);
+                InstructorPageController instructorPageController = loader.getController();
+                instructorPageController.setUserInformation(username);
             } catch(IOException e){
                 e.printStackTrace();
             }
@@ -79,7 +80,14 @@ public class DBUtils {
                 psInsert.setString(3, role);
                 psInsert.executeUpdate();
 
-                changeScene(event, "main-view.fxml", "Welcome", username, role);
+                if(role.equals("Administrator")){
+                    changeScene(event, "admin-page.fxml", "Admin page", username, role);
+                }else if(role.equals("Instructor")){
+                    changeScene(event, "instructor-page.fxml", "Instructor Page", username, role);
+                }
+                else {
+                    changeScene(event, "main-view.fxml", "Welcome", username, role);
+                }
             }
         } catch(SQLException e) {
             e.printStackTrace();
@@ -135,7 +143,13 @@ public class DBUtils {
                     String retrievedPassword = resultSet.getString("password");
                     String retrievedRole = resultSet.getString("role");
                     if(retrievedPassword.equals(password)){
-                        changeScene(event, "main-view.fxml", "welcome", username, retrievedRole);
+                        if(retrievedRole.equals("Administrator")){
+                            changeScene(event,"admin-page.fxml", "Admin Page", username, retrievedRole);
+                        } else if(retrievedRole.equals("Instructor")){
+                            changeScene(event, "instructor-page.fxml", "Instructor Page", username, retrievedRole);
+                        }else {
+                            changeScene(event, "main-view.fxml", "welcome", username, retrievedRole);
+                        }
                     } else {
                         System.out.println("Incorrect Password");
                         Alert alert = new Alert(Alert.AlertType.ERROR);

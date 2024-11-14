@@ -1,9 +1,11 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Offering {
 
+    private int id;
     private Schedule schedule = new Schedule(null, null, null, null, null);
     private Lesson lesson = new Lesson(null, null, null);
     private Location location = new Location(null, null);
@@ -20,7 +22,8 @@ public class Offering {
     private String city;
     private String locationType;
 
-    public Offering(Date startDate, Date endDate, String startTime, String endTime, String dayOfWeek, String lessonType, String duration, String lessonPrivacy, String city, String locationType, String availability, String instructor) {
+    public Offering(int id, LocalDate startDate, LocalDate endDate, String startTime, String endTime, String dayOfWeek, String lessonType, String duration, String lessonPrivacy, String city, String locationType, String availability, String instructor) {
+        this.id = id;
         schedule.setStartDate(startDate);
         schedule.setEndDate(endDate);
         schedule.setStartTime(startTime);
@@ -36,6 +39,12 @@ public class Offering {
         this.instructor = instructor;
     }
 
+    public int getId(){
+        return id;
+    }
+    public void setId(int id){
+        this.id = id;
+    }
     public String getAvailability() {
         return availability;
     }
@@ -52,19 +61,19 @@ public class Offering {
         this.instructor = instructor;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return schedule.getStartDate();
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         schedule.setStartDate(startDate);
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return schedule.getEndDate();
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         schedule.setEndDate(endDate);
     }
 

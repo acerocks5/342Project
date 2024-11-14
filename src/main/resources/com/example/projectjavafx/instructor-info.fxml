@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="442.0" prefWidth="841.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectjavafx.InstructorInfoController">
+   <children>
+      <AnchorPane prefHeight="445.0" prefWidth="842.0">
+         <children>
+            <Label layoutX="305.0" layoutY="27.0" text="Instructor Info">
+               <font>
+                  <Font size="37.0" />
+               </font>
+            </Label>
+            <VBox layoutX="41.0" layoutY="81.0" prefHeight="336.0" prefWidth="759.0">
+               <children>
+                  <HBox prefHeight="84.0" prefWidth="759.0" style="-fx-alignment: center_left;">
+                     <children>
+                        <Label text="Name:">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tf_name" prefHeight="49.0" prefWidth="695.0" style="-fx-translate-x: 5;" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="84.0" prefWidth="759.0" style="-fx-alignment: center_left;">
+                     <children>
+                        <Label text="Phone Number:">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tf_phoneNumber" prefHeight="49.0" prefWidth="618.0" style="-fx-translate-x: 5;" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="84.0" prefWidth="759.0" style="-fx-alignment: center_left;">
+                     <children>
+                        <Label text="Specialization:">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tf_specialization" prefHeight="50.0" prefWidth="632.0" style="-fx-translate-x: 5;" />
+                     </children>
+                  </HBox>
+                  <HBox prefHeight="84.0" prefWidth="200.0" style="-fx-alignment: center_left;">
+                     <children>
+                        <Label text="Availability:">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                        <TextField fx:id="tf_availability" prefHeight="49.0" prefWidth="656.0" style="-fx-translate-x: 5;" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+            <Button fx:id="button_addInfo" layoutX="682.0" layoutY="42.0" mnemonicParsing="false" text="Add Info" />
+         </children>
+      </AnchorPane>
+   </children>
+</VBox>

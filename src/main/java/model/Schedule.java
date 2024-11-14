@@ -1,16 +1,17 @@
 package model;
 
+import java.time.LocalDate;
 import java.util.Date;
 
 public class Schedule {
 
-    private Date startDate;
-    private Date endDate;
+    private LocalDate startDate;
+    private LocalDate endDate;
     private String startTime;
     private String endTime;
     private String dayOfWeek;
 
-    public Schedule(Date startDate, Date endDate, String startTime, String endTime, String dayOfWeek) {
+    public Schedule(LocalDate startDate, LocalDate endDate, String startTime, String endTime, String dayOfWeek) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.startTime = startTime;
@@ -18,19 +19,19 @@ public class Schedule {
         this.dayOfWeek = dayOfWeek;
     }
 
-    public Date getStartDate() {
+    public LocalDate getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(Date startDate) {
+    public void setStartDate(LocalDate startDate) {
         this.startDate = startDate;
     }
 
-    public Date getEndDate() {
+    public LocalDate getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(Date endDate) {
+    public void setEndDate(LocalDate endDate) {
         this.endDate = endDate;
     }
 

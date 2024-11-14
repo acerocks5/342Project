@@ -3,12 +3,12 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="703.0" prefWidth="1125.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectjavafx.MainController">
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="715.0" prefWidth="1201.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectjavafx.MainController">
    <children>
-      <AnchorPane prefHeight="705.0" prefWidth="1126.0">
+      <AnchorPane prefHeight="716.0" prefWidth="1202.0">
          <children>
             <Button fx:id="button_login" layoutX="52.0" layoutY="34.0" mnemonicParsing="false" text="Login" />
-            <TableView fx:id="offeringTable" layoutX="14.0" layoutY="76.0" prefHeight="605.0" prefWidth="1101.0">
+            <TableView fx:id="offeringTable" layoutX="14.0" layoutY="76.0" prefHeight="627.0" prefWidth="1169.0">
               <columns>
                   <TableColumn fx:id="lesson_col" prefWidth="100.0" text="Type of Lesson" />
                   <TableColumn fx:id="instructor_col" prefWidth="100.0" text="Instructor" />
@@ -22,6 +22,7 @@
                   <TableColumn fx:id="timeSlot_col" prefWidth="75.0" text="Time Slot" />
                   <TableColumn fx:id="privacy_col" prefWidth="75.0" text="Privacy" />
                   <TableColumn fx:id="availability_col" prefWidth="75.0" text="Availability" />
+                  <TableColumn fx:id="id_col" prefWidth="75.0" text="Id" />
               </columns>
             </TableView>
          </children>
