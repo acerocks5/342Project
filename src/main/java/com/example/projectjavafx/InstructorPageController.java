@@ -9,10 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -38,6 +35,8 @@ public class InstructorPageController implements Initializable {
     private Button button_selectOffering;
     @FXML
     private Button button_info;
+    @FXML
+    private Label label_user;
 
     @FXML
     private TableView<Offering> offeringTable;
@@ -69,7 +68,7 @@ public class InstructorPageController implements Initializable {
     private TableColumn<Offering, String> id_col;
 
 
-    private String username = null;
+    private String username;
     String query = null;
     Connection connection = null;
     PreparedStatement preparedStatement = null;
@@ -82,10 +81,10 @@ public class InstructorPageController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         loadTable();
-
         button_info.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
+                setUsername(label_user.getText());
                 getInstructorInfoView(username);
             }
         });
@@ -185,6 +184,8 @@ public class InstructorPageController implements Initializable {
         connection = DBUtils.getConnection();
         PreparedStatement psCheckUsername = null;
         ResultSet resultSet = null;
+        setUsername(label_user.getText());
+        System.out.print(username);
 
         TableView.TableViewSelectionModel<Offering> selectionModel = offeringTable.getSelectionModel();
         if(selectionModel.isEmpty()){
@@ -205,7 +206,7 @@ public class InstructorPageController implements Initializable {
         for(int i = selectedIndices.length -1; i >= 0; i--){
             selectionModel.clearSelection(selectedIndices[i].intValue());
             try{
-                psCheckUsername = connection.prepareStatement("SELECT name FROM 342Project.instructors WHERE username = username");
+                psCheckUsername = connection.prepareStatement("SELECT name FROM 342Project.instructors WHERE username ='"+username+"'");
                 resultSet = (psCheckUsername.executeQuery());
                 int id = selectedIndices[i].intValue()+1;
 
@@ -225,6 +226,10 @@ public class InstructorPageController implements Initializable {
     }
 
     public void setUserInformation(String username){
+        label_user.setText(username);
+    }
+
+    public void setUsername(String username){
         this.username = username;
     }
 

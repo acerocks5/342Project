@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="554.0" prefWidth="841.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectjavafx.ClientInfoController">
+    <children>
+        <AnchorPane prefHeight="554.0" prefWidth="924.0">
+            <children>
+                <Label layoutX="354.0" layoutY="27.0" text="Client Info">
+                    <font>
+                        <Font size="37.0" />
+                    </font>
+                </Label>
+                <VBox layoutX="41.0" layoutY="81.0" prefHeight="252.0" prefWidth="759.0">
+                    <children>
+                        <HBox prefHeight="84.0" prefWidth="759.0" style="-fx-alignment: center_left;">
+                            <children>
+                                <Label text="Name:">
+                                    <font>
+                                        <Font size="19.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="tf_name" prefHeight="49.0" prefWidth="695.0" style="-fx-translate-x: 5;" />
+                            </children>
+                        </HBox>
+                        <HBox prefHeight="84.0" prefWidth="759.0" style="-fx-alignment: center_left;">
+                            <children>
+                                <Label text="Phone Number:">
+                                    <font>
+                                        <Font size="19.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="tf_phoneNumber" prefHeight="49.0" prefWidth="618.0" style="-fx-translate-x: 5;" />
+                            </children>
+                        </HBox>
+                        <HBox prefHeight="84.0" prefWidth="759.0" style="-fx-alignment: center_left;">
+                            <children>
+                                <Label text="Age:">
+                                    <font>
+                                        <Font size="19.0" />
+                                    </font>
+                                </Label>
+                                <TextField fx:id="tf_age" prefHeight="50.0" prefWidth="716.0" style="-fx-translate-x: 5;" />
+                            </children>
+                        </HBox>
+                    </children>
+                </VBox>
+                <Button fx:id="button_addInfo" layoutX="682.0" layoutY="42.0" mnemonicParsing="false" text="Add Info" />
+            <TableView fx:id="childTable" layoutX="37.0" layoutY="325.0" prefHeight="204.0" prefWidth="376.0">
+              <columns>
+                <TableColumn fx:id="child_col" prefWidth="229.20000076293945" text="Child" />
+                <TableColumn fx:id="age_col" prefWidth="146.0" text="Age" />
+              </columns>
+            </TableView>
+            <Button fx:id="button_addChild" layoutX="582.0" layoutY="333.0" mnemonicParsing="false" text="Add Child" />
+            <Label layoutX="443.0" layoutY="426.0" text="Age:" />
+            <Label layoutX="438.0" layoutY="387.0" text="Name:" />
+            <TextField fx:id="tf_childName" layoutX="501.0" layoutY="383.0" />
+            <TextField fx:id="tf_childAge" layoutX="501.0" layoutY="422.0" />
+            <Label fx:id="label_user" layoutX="56.0" layoutY="46.0" text="User" />
+            <Button fx:id="button_refresh" layoutX="455.0" layoutY="333.0" mnemonicParsing="false" text="Refresh" />
+            </children>
+        </AnchorPane>
+    </children>
+</VBox>

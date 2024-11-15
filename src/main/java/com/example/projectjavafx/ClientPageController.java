@@ -9,10 +9,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -35,9 +32,13 @@ public class ClientPageController implements Initializable {
     @FXML
     private Button button_refresh;
     @FXML
-    private Button button_selectOffering;
+    private Button button_bookOffering;
+    @FXML
+    private Button button_viewBookings;
     @FXML
     private Button button_info;
+    @FXML
+    private Label label_user;
 
     @FXML
     private TableView<Offering> offeringTable;
@@ -86,14 +87,15 @@ public class ClientPageController implements Initializable {
         button_info.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                getInstructorInfoView(username);
+               setUsername(label_user.getText());
+               getClientInfoView(username);
             }
         });
 
-        button_selectOffering.setOnAction(new EventHandler<ActionEvent>() {
+        button_bookOffering.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
-                selectLesson();
+                //IMPLEMENT bookLesson();
             }
         });
 
@@ -165,14 +167,14 @@ public class ClientPageController implements Initializable {
 
     }
 
-    private void getInstructorInfoView(String username){
+    private void getClientInfoView(String username){
         try{
-            FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource("instructor-info.fxml"));
+            FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource("client-info.fxml"));
             Parent parent = loader.load();
             Scene scene = new Scene(parent);
             Stage stage = new Stage();
-            InstructorInfoController instructorInfoController = loader.getController();
-            instructorInfoController.setUserInformation(username);
+            ClientInfoController clientInfoController = loader.getController();
+            clientInfoController.setUserInformation(username);
             stage.setScene(scene);
             stage.initStyle(StageStyle.UTILITY);
             stage.show();
@@ -225,6 +227,9 @@ public class ClientPageController implements Initializable {
     }
 
     public void setUserInformation(String username){
+        label_user.setText(username);
+    }
+    public void setUsername(String username){
         this.username = username;
     }
 

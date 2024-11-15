@@ -38,8 +38,15 @@ public class DBUtils {
             try{
                 FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource(fxmlFile));
                 root = loader.load();
-                InstructorPageController instructorPageController = loader.getController();
-                instructorPageController.setUserInformation(username);
+                if(loader.getController().toString().split("@")[0].equals("com.example.projectjavafx.InstructorPageController")) {
+                    System.out.print("worked");
+                    InstructorPageController instructorPageController = loader.getController();
+                    instructorPageController.setUserInformation(username);
+                } else if(loader.getController().toString().split("@")[0].equals("com.example.projectjavafx.ClientPageController")){
+                    System.out.print("worked");
+                    ClientPageController clientPageController = loader.getController();
+                    clientPageController.setUserInformation(username);
+                }
             } catch(IOException e){
                 e.printStackTrace();
             }
@@ -85,7 +92,9 @@ public class DBUtils {
                 }else if(role.equals("Instructor")){
                     changeScene(event, "instructor-page.fxml", "Instructor Page", username, role);
                 }
-                else {
+                else if(role.equals("Client")){
+                    changeScene(event, "client-page.fxml", "Client Page", username, role);
+                }else {
                     changeScene(event, "main-view.fxml", "Welcome", username, role);
                 }
             }
@@ -147,6 +156,8 @@ public class DBUtils {
                             changeScene(event,"admin-page.fxml", "Admin Page", username, retrievedRole);
                         } else if(retrievedRole.equals("Instructor")){
                             changeScene(event, "instructor-page.fxml", "Instructor Page", username, retrievedRole);
+                        }else if(retrievedRole.equals("Client")){
+                            changeScene(event, "client-page.fxml", "Client Page", username, retrievedRole);
                         }else {
                             changeScene(event, "main-view.fxml", "welcome", username, retrievedRole);
                         }

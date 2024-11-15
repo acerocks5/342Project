@@ -54,6 +54,7 @@ public class MainController implements Initializable {
     private TableColumn<Offering, String> availability_col;
     @FXML
     private TableColumn<Offering, Integer> id_col;
+    private String username;
 
     String query = null;
     Connection connection = null;

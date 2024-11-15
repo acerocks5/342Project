@@ -58,6 +58,7 @@
                </children>
             </VBox>
             <Button fx:id="button_addInfo" layoutX="682.0" layoutY="42.0" mnemonicParsing="false" text="Add Info" />
+            <Label fx:id="label_user" layoutX="72.0" layoutY="46.0" text="User" />
          </children>
       </AnchorPane>
    </children>

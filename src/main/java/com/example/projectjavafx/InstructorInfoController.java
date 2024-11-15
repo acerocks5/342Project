@@ -6,6 +6,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import model.Instructor;
 import model.Offering;
@@ -29,6 +30,8 @@ public class InstructorInfoController implements Initializable {
     private TextField tf_specialization;
     @FXML
     private TextField tf_availability;
+    @FXML
+    private Label label_user;
     @FXML
     private Button button_addInfo;
     String username = null;
@@ -66,8 +69,9 @@ public class InstructorInfoController implements Initializable {
         ResultSet resultSet = null;
 
         try {
-            psCheckUserExists = connection.prepareStatement("SELECT  * FROM instructors WHERE username = ?");
-            psCheckUserExists.setString(1, username);
+            String user = label_user.getText();
+            System.out.println(user);
+            psCheckUserExists = connection.prepareStatement("SELECT * FROM instructors WHERE username = '"+user+"'");
             resultSet = psCheckUserExists.executeQuery();
             if (name.isEmpty() || phoneNumber.isEmpty() || specialization.isEmpty() || availability.isEmpty()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -127,6 +131,7 @@ public class InstructorInfoController implements Initializable {
     }
 
     public void setUserInformation(String username){
-        this.username = username;
+        label_user.setText(username);
     }
+
 }
