@@ -115,6 +115,7 @@ public class InstructorInfoController implements Initializable {
 
     private void insert(){
         try{
+            setUsername(label_user.getText());
             preparedStatement = connection.prepareStatement(query);
             preparedStatement.setString(1, tf_name.getText());
             preparedStatement.setString(2, tf_phoneNumber.getText());
@@ -132,6 +133,9 @@ public class InstructorInfoController implements Initializable {
 
     public void setUserInformation(String username){
         label_user.setText(username);
+    }
+    public void setUsername(String username){
+        this.username=username;
     }
 
 }

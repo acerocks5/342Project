@@ -147,7 +147,7 @@ public class ClientPageController implements Initializable {
             setUsername(label_user.getText());
             OfferingList.clear();
 
-            query = "SELECT * FROM `offering` WHERE status <> 'not available'";
+            query = "SELECT * FROM `offering` WHERE instructor <> 'none'";
             preparedStatement = connection.prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
 
@@ -298,7 +298,7 @@ public class ClientPageController implements Initializable {
         }
     }
     private void getQuery(){
-        query = "Insert INTO `booking`(`startDate`, `endDate`, `startTime`, `endTime`, `dayOfWeek`, `lessonType`, `lessonDuration`, `city`, `locationType`, `status`, `lessonPrivacy`, `instructor`, `client`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?)";
+        query = "Insert INTO `booking`(`startDate`, `endDate`, `startTime`, `endTime`, `dayOfWeek`, `lessonType`, `lessonDuration`, `city`, `locationType`, `status`, `lessonPrivacy`, `instructor`, `client`, `user`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
     }
     private void insert(){
         try{
@@ -317,6 +317,7 @@ public class ClientPageController implements Initializable {
             preparedStatement.setString(11, lessonPrivacy);
             preparedStatement.setString(12, instructor);
             preparedStatement.setString(13, choiceBox_choose.getValue());
+            preparedStatement.setString(14, username);
             preparedStatement.execute();
         } catch (SQLException e){
             Logger.getLogger(ClientPageController.class.getName()).log(Level.SEVERE, null, e);

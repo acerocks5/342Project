@@ -81,7 +81,7 @@ public class MainController implements Initializable {
         try{
             OfferingList.clear();
 
-            query = "SELECT * FROM `offering` WHERE status <> 'not available'";
+            query = "SELECT * FROM `offering` WHERE instructor <> 'none'";
             preparedStatement = connection.prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
 
