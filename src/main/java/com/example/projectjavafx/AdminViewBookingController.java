@@ -5,23 +5,17 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.geometry.Insets;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
-import javafx.util.Callback;
+import model.Booking;
 import model.Offering;
-import org.w3c.dom.events.MouseEvent;
 
-import java.io.IOException;
 import java.net.URL;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
@@ -29,104 +23,83 @@ import java.util.logging.Logger;
 
 import static java.lang.Integer.parseInt;
 
-public class AdminPageController implements Initializable{
-    @FXML
-    private Button button_logout;
-    @FXML
-    private Button button_viewBookings;
-    @FXML
-    private Button button_addOffering;
+public class AdminViewBookingController implements Initializable {
     @FXML
     private Button button_refresh;
     @FXML
     private Button button_delete;
-
     @FXML
-    private TableView<Offering> offeringTable;
+    private TableView<Booking> bookingTable;
     @FXML
-    private TableColumn<Offering, String> lesson_col;
+    private TableColumn<Booking, String> lesson_col;
     @FXML
-    private TableColumn<Offering, String> instructor_col;
+    private TableColumn<Booking, String> instructor_col;
     @FXML
-    private TableColumn<Offering, String> startDate_col;
+    private TableColumn<Booking, String> startDate_col;
     @FXML
-    private TableColumn<Offering, String> endDate_col;
+    private TableColumn<Booking, String> endDate_col;
     @FXML
-    private TableColumn<Offering, String> startTime_col;
+    private TableColumn<Booking, String> startTime_col;
     @FXML
-    private TableColumn<Offering, String> endTime_col;
+    private TableColumn<Booking, String> endTime_col;
     @FXML
-    private TableColumn<Offering, String> dayOfWeek_col;
+    private TableColumn<Booking, String> dayOfWeek_col;
     @FXML
-    private TableColumn<Offering, String> city_col;
+    private TableColumn<Booking, String> city_col;
     @FXML
-    private TableColumn<Offering, String> location_col;
+    private TableColumn<Booking, String> location_col;
     @FXML
-    private TableColumn<Offering, String> timeSlot_col;
+    private TableColumn<Booking, String> timeSlot_col;
     @FXML
-    private TableColumn<Offering, String> privacy_col;
+    private TableColumn<Booking, String> privacy_col;
     @FXML
-    private TableColumn<Offering, String> availability_col;
+    private TableColumn<Booking, String> availability_col;
     @FXML
-    private TableColumn<Offering, String> id_col;
-
-
+    private TableColumn<Booking, String> client_col;
+    @FXML
+    private TableColumn<Booking, String> id_col;
+    private String username;
     String query = null;
+    String queryInstructor = null;
     Connection connection = null;
     PreparedStatement preparedStatement = null;
+    PreparedStatement preparedStatement2 = null;
     ResultSet resultSet = null;
+    ResultSet resultSet2 = null;
     Offering offering = null;
+    String name = null;
 
-    ObservableList<Offering> OfferingList = FXCollections.observableArrayList();
+    ObservableList<Booking> BookingList = FXCollections.observableArrayList();
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         loadTable();
+        button_refresh.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                refreshTable();
+            }
+        });
         button_delete.setOnAction(new EventHandler<ActionEvent>() {
             @Override
             public void handle(ActionEvent actionEvent) {
                 deleteData();
             }
         });
-        button_refresh.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                refreshTable();
-            }
-        });
-        button_addOffering.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                getAddOfferingView();
-            }
-        });
-        button_logout.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent event) {
-                DBUtils.changeScene(event, "main-view.fxml", "Main Page", null, null);
-            }
-        });
-        button_viewBookings.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                getAdminViewBookings();
-            }
-        });
 
     }
-
     public void refreshTable(){
         try{
-            OfferingList.clear();
 
-            query = "SELECT * FROM `offering`";
+            BookingList.clear();
+            query = "SELECT * FROM `booking`";
             preparedStatement = connection.prepareStatement(query);
             resultSet = preparedStatement.executeQuery();
 
             while(resultSet.next()){
-                OfferingList.add(new Offering(
-                        resultSet.getString("idoffering"),
+                BookingList.add(new Booking(
+                        resultSet.getString("idbooking"),
                         resultSet.getString("startDate"),
                         resultSet.getString("endDate"),
                         resultSet.getString("startTime"),
@@ -138,16 +111,18 @@ public class AdminPageController implements Initializable{
                         resultSet.getString("city"),
                         resultSet.getString("locationType"),
                         resultSet.getString("status"),
-                        resultSet.getString("instructor")
+                        resultSet.getString("instructor"),
+                        resultSet.getString("client"),
+                        resultSet.getString("user")
                 ));
-                offeringTable.setItems(OfferingList);
+                bookingTable.setItems(BookingList);
             }
-        }catch(SQLException e){
-            Logger.getLogger(MainController.class.getName()).log(Level.SEVERE, null, e);
+        }catch (SQLException e){
+            Logger.getLogger(ClientViewBookingController.class.getName()).log(Level.SEVERE, null, e);
         }
     }
 
-    private void loadTable() {
+    public void loadTable(){
         connection = DBUtils.getConnection();
         refreshTable();
 
@@ -163,13 +138,13 @@ public class AdminPageController implements Initializable{
         timeSlot_col.setCellValueFactory(new PropertyValueFactory<>("duration"));
         privacy_col.setCellValueFactory(new PropertyValueFactory<>("lessonPrivacy"));
         availability_col.setCellValueFactory(new PropertyValueFactory<>("availability"));
-        id_col.setCellValueFactory((new PropertyValueFactory<>("id")));
-
+        client_col.setCellValueFactory(new PropertyValueFactory<>("client"));
+        id_col.setCellValueFactory(new PropertyValueFactory<>("id"));
 
     }
 
     private void deleteData(){
-        TableView.TableViewSelectionModel<Offering> selectionModel = offeringTable.getSelectionModel();
+        TableView.TableViewSelectionModel<Booking> selectionModel = bookingTable.getSelectionModel();
         if(selectionModel.isEmpty()){
             System.out.println("You need to select offering before deleting");
             Alert alert = new Alert(Alert.AlertType.ERROR);
@@ -187,8 +162,8 @@ public class AdminPageController implements Initializable{
             selectionModel.clearSelection(selectedIndices[i].intValue());
             try{
                 int id = selectedIndices[i].intValue()+1;
-                int offerId = parseInt(id_col.getCellData(id-1));
-                query = "DELETE FROM `offering` WHERE idoffering  ="+offerId;
+                int bookId = parseInt(id_col.getCellData(id-1));
+                query = "DELETE FROM `booking` WHERE idbooking  ="+bookId;
                 connection = DBUtils.getConnection();
                 preparedStatement = connection.prepareStatement(query);
                 preparedStatement.execute();
@@ -197,33 +172,6 @@ public class AdminPageController implements Initializable{
             } catch (SQLException ex) {
                 Logger.getLogger(AdminPageController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        }
-
-    }
-
-    private void getAddOfferingView(){
-        try{
-            Parent parent = FXMLLoader.load(getClass().getResource("add-offering.fxml"));
-            Scene scene = new Scene(parent);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.initStyle(StageStyle.UTILITY);
-            stage.show();
-        } catch (IOException e){
-            Logger.getLogger(AdminPageController.class.getName()).log(Level.SEVERE, null, e);
-        }
-    }
-    private void getAdminViewBookings(){
-        try{
-            FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource("view-booking-admin.fxml"));
-            Parent parent = loader.load();
-            Scene scene = new Scene(parent);
-            Stage stage = new Stage();
-            stage.setScene(scene);
-            stage.initStyle(StageStyle.UTILITY);
-            stage.show();
-        } catch (IOException e){
-            Logger.getLogger(ClientPageController.class.getName()).log(Level.SEVERE, null, e);
         }
 
     }

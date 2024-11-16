@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="726.0" prefWidth="1248.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectjavafx.AdminViewBookingController">
+    <children>
+        <AnchorPane prefHeight="728.0" prefWidth="1248.0">
+            <children>
+                <TableView fx:id="bookingTable" layoutX="14.0" layoutY="76.0" prefHeight="627.0" prefWidth="1218.0">
+                    <columns>
+                        <TableColumn fx:id="lesson_col" prefWidth="100.0" text="Type of Lesson" />
+                        <TableColumn fx:id="instructor_col" prefWidth="100.0" text="Instructor" />
+                        <TableColumn fx:id="startDate_col" prefWidth="100.0" text="Start Date" />
+                        <TableColumn fx:id="endDate_col" prefWidth="100.0" text="End Date" />
+                        <TableColumn fx:id="startTime_col" prefWidth="100.0" text="Start Time" />
+                        <TableColumn fx:id="endTime_col" prefWidth="100.0" text="End Time" />
+                        <TableColumn fx:id="dayOfWeek_col" prefWidth="100.0" text="Day of Week" />
+                        <TableColumn fx:id="city_col" prefWidth="75.0" text="City" />
+                        <TableColumn fx:id="location_col" prefWidth="75.0" text="Location" />
+                        <TableColumn fx:id="timeSlot_col" prefWidth="75.0" text="Time Slot" />
+                        <TableColumn fx:id="privacy_col" prefWidth="75.0" text="Privacy" />
+                        <TableColumn fx:id="availability_col" prefWidth="75.0" text="Availability" />
+                        <TableColumn fx:id="client_col" prefWidth="75.0" text="Client" />
+                        <TableColumn fx:id="id_col" prefWidth="65.199951171875" text="id" />
+                    </columns>
+                </TableView>
+                <Button fx:id="button_refresh" layoutX="1077.0" layoutY="32.0" mnemonicParsing="false" text="Refresh" />
+            <Button fx:id="button_delete" layoutX="1152.0" layoutY="32.0" mnemonicParsing="false" text="Delete" />
+            </children>
+        </AnchorPane>
+    </children>
+</VBox>

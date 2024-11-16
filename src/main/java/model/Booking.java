@@ -1,10 +1,6 @@
 package model;
 
-import java.time.LocalDate;
-import java.util.Date;
-
-public class Offering {
-
+public class Booking {
     private String id;
     private Schedule schedule = new Schedule(null, null, null, null, null);
     private Lesson lesson = new Lesson(null, null, null);
@@ -21,8 +17,10 @@ public class Offering {
     private String lessonPrivacy;
     private String city;
     private String locationType;
+    private String client;
+    private String user;
 
-    public Offering(String id, String startDate, String endDate, String startTime, String endTime, String dayOfWeek, String lessonType, String duration, String lessonPrivacy, String city, String locationType, String availability, String instructor) {
+    public Booking(String id, String startDate, String endDate, String startTime, String endTime, String dayOfWeek, String lessonType, String duration, String lessonPrivacy, String city, String locationType, String availability, String instructor, String client, String user) {
         this.id = id;
         schedule.setStartDate(startDate);
         schedule.setEndDate(endDate);
@@ -37,8 +35,9 @@ public class Offering {
 
         this.availability = availability;
         this.instructor = instructor;
+        this.client = client;
+        this.user = user;
     }
-
     public String getId(){
         return id;
     }
@@ -139,5 +138,21 @@ public class Offering {
 
     public void setLocationType(String locationType) {
         location.setLocationType(locationType);
+    }
+
+    public String getClient() {
+        return client;
+    }
+
+    public void setClient(String client) {
+        this.client = client;
+    }
+
+    public String getUser() {
+        return user;
+    }
+
+    public void setUser(String user) {
+        this.user = user;
     }
 }

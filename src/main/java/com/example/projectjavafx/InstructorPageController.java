@@ -26,7 +26,11 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import static java.lang.Integer.parseInt;
+
 public class InstructorPageController implements Initializable {
+    @FXML
+    private Button button_viewBookings;
     @FXML
     private Button button_logout;
     @FXML
@@ -109,11 +113,18 @@ public class InstructorPageController implements Initializable {
                 DBUtils.changeScene(event, "main-view.fxml", "Main Page", null, null);
             }
         });
+        button_viewBookings.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                getInstructorViewBookings();
+            }
+        });
 
     }
 
     public void refreshTable(){
         try{
+            setUsername(label_user.getText());
             OfferingList.clear();
 
             query = "SELECT * FROM `offering`";
@@ -122,9 +133,9 @@ public class InstructorPageController implements Initializable {
 
             while(resultSet.next()){
                 OfferingList.add(new Offering(
-                        resultSet.getInt("idoffering"),
-                        resultSet.getDate("startDate").toLocalDate(),
-                        resultSet.getDate("endDate").toLocalDate(),
+                        resultSet.getString("idoffering"),
+                        resultSet.getString("startDate"),
+                        resultSet.getString("endDate"),
                         resultSet.getString("startTime"),
                         resultSet.getString("endTime"),
                         resultSet.getString("dayOfWeek"),
@@ -212,7 +223,8 @@ public class InstructorPageController implements Initializable {
 
                 while(resultSet.next()){
                     String name = resultSet.getString(1);
-                    query = "UPDATE 342Project.offering SET instructor = '"+name+"', status = 'available' WHERE idoffering ="+id;
+                    int offerId = parseInt(id_col.getCellData(id-1));
+                    query = "UPDATE 342Project.offering SET instructor = '"+name+"', status = 'available' WHERE idoffering ="+offerId;
                 }
                 connection = DBUtils.getConnection();
                 preparedStatement = connection.prepareStatement(query);
@@ -223,6 +235,22 @@ public class InstructorPageController implements Initializable {
                 Logger.getLogger(AdminPageController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+    private void getInstructorViewBookings(){
+        try{
+            FXMLLoader loader = new FXMLLoader(DBUtils.class.getResource("view-booking-instructor.fxml"));
+            Parent parent = loader.load();
+            Scene scene = new Scene(parent);
+            Stage stage = new Stage();
+            InstructorViewBookingController instructorViewBookingController = loader.getController();
+            instructorViewBookingController.setUserInformation(username);
+            stage.setScene(scene);
+            stage.initStyle(StageStyle.UTILITY);
+            stage.show();
+        } catch (IOException e){
+            Logger.getLogger(ClientPageController.class.getName()).log(Level.SEVERE, null, e);
+        }
+
     }
 
     public void setUserInformation(String username){

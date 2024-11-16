@@ -28,6 +28,7 @@
             <Button fx:id="button_addOffering" layoutX="1031.0" layoutY="34.0" mnemonicParsing="false" text="Add Offering" />
             <Button fx:id="button_refresh" layoutX="910.0" layoutY="34.0" mnemonicParsing="false" text="Refresh" />
             <Button fx:id="button_delete" layoutX="966.0" layoutY="34.0" mnemonicParsing="false" text="Delete" />
+            <Button fx:id="button_viewBookings" layoutX="237.0" layoutY="34.0" mnemonicParsing="false" text="View Bookings" />
             </children>
         </AnchorPane>
     </children>

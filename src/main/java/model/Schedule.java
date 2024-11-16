@@ -5,13 +5,13 @@ import java.util.Date;
 
 public class Schedule {
 
-    private LocalDate startDate;
-    private LocalDate endDate;
+    private String startDate;
+    private String endDate;
     private String startTime;
     private String endTime;
     private String dayOfWeek;
 
-    public Schedule(LocalDate startDate, LocalDate endDate, String startTime, String endTime, String dayOfWeek) {
+    public Schedule(String startDate, String endDate, String startTime, String endTime, String dayOfWeek) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.startTime = startTime;
@@ -19,19 +19,19 @@ public class Schedule {
         this.dayOfWeek = dayOfWeek;
     }
 
-    public LocalDate getStartDate() {
+    public String getStartDate() {
         return startDate;
     }
 
-    public void setStartDate(LocalDate startDate) {
+    public void setStartDate(String startDate) {
         this.startDate = startDate;
     }
 
-    public LocalDate getEndDate() {
+    public String getEndDate() {
         return endDate;
     }
 
-    public void setEndDate(LocalDate endDate) {
+    public void setEndDate(String endDate) {
         this.endDate = endDate;
     }
 

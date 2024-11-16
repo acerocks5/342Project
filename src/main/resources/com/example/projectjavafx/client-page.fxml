@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="715.0" prefWidth="1201.0" xmlns="http://javafx.com/javafx/17.0.2-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projectjavafx.ClientPageController">
     <children>
@@ -25,11 +26,17 @@
                         <TableColumn fx:id="id_col" minWidth="0.0" prefWidth="44.199951171875" text="Id" />
                     </columns>
                 </TableView>
-                <Button fx:id="button_refresh" layoutX="910.0" layoutY="34.0" mnemonicParsing="false" text="Refresh" />
+                <Button fx:id="button_refresh" layoutX="649.0" layoutY="34.0" mnemonicParsing="false" text="Refresh" />
                 <Button fx:id="button_bookOffering" layoutX="1051.0" layoutY="34.0" mnemonicParsing="false" text="Book Offering" />
                 <Button fx:id="button_info" layoutX="156.0" layoutY="34.0" mnemonicParsing="false" text="Info" />
             <Button fx:id="button_viewBookings" layoutX="236.0" layoutY="34.0" mnemonicParsing="false" text="View Bookings" />
             <Label fx:id="label_user" layoutX="463.0" layoutY="38.0" text="User" />
+            <ChoiceBox fx:id="choiceBox_choose" layoutX="888.0" layoutY="34.0" prefWidth="150.0" />
+            <Label layoutX="730.0" layoutY="34.0" text="Choose who to book:">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
             </children>
         </AnchorPane>
     </children>
